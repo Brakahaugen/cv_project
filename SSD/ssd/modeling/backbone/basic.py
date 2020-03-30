@@ -108,7 +108,7 @@ class BasicModel(torch.nn.Module):
             torch.nn.BatchNorm2d(self.output_channels[3]),
             nn.ReLU(),
             
-            #Adding three extra for depth
+            #extra layer
             self.addConv2D(self.output_channels[3], self.output_channels[3]),
             torch.nn.BatchNorm2d(self.output_channels[3]),
             nn.ReLU(),
@@ -118,6 +118,7 @@ class BasicModel(torch.nn.Module):
             self.addConv2D(self.output_channels[3], self.output_channels[3]),
             torch.nn.BatchNorm2d(self.output_channels[3]),
             nn.ReLU(),
+            
             
             self.addConv2D(self.output_channels[3], self.output_channels[4], s=2),  
         ))
@@ -129,7 +130,7 @@ class BasicModel(torch.nn.Module):
             torch.nn.BatchNorm2d(self.output_channels[4]),
             nn.ReLU(),
             
-            #Adding three extra for depth
+            #extra layer
             self.addConv2D(self.output_channels[4], self.output_channels[4]),
             torch.nn.BatchNorm2d(self.output_channels[4]),
             nn.ReLU(),
@@ -138,7 +139,8 @@ class BasicModel(torch.nn.Module):
             nn.ReLU(),
             self.addConv2D(self.output_channels[4], self.output_channels[4]),
             torch.nn.BatchNorm2d(self.output_channels[4]),
-            nn.ReLU(),  
+            nn.ReLU(),
+            
             
             self.addConv2D(self.output_channels[4], self.output_channels[5], padding=0),
         ))
@@ -159,7 +161,7 @@ class BasicModel(torch.nn.Module):
 
         out_features = []
         last_out_feature = x
-        for i in range(8):
+        for i in range(6):
             last_out_feature = self.models[i](last_out_feature)
             out_features.append(last_out_feature)
 
