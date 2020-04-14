@@ -26,7 +26,7 @@ class PriorBox:
         for k, f in enumerate(self.feature_maps):
             scale_x = self.image_size[0] / self.strides[k][0]
             scale_y = self.image_size[1] / self.strides[k][1]
-
+            print(f)
             for i, j in product(range(f[0]), range(f[1])):
                 # unit center x,y
                 cx = (j + 0.5) / scale_x
