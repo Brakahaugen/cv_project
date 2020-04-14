@@ -1,5 +1,7 @@
 from torch import nn
 import torch
+import torchvision.models as models
+
 
 
 class BasicModel(torch.nn.Module):
@@ -22,6 +24,15 @@ class BasicModel(torch.nn.Module):
         image_channels = cfg.MODEL.BACKBONE.INPUT_CHANNELS
         self.output_feature_size = cfg.MODEL.PRIORS.FEATURE_MAPS
 
+
+        # self.models = nn.ModuleList()
+        # self.models.append(models.vgg16_bn())
+        # self.models.append(nn.Sequential(
+        #     # lag siste bit selv
+        # ))
+        self.model = models.vgg16_bn()
+        
+        '''
         self.models = nn.ModuleList()
         self.models.append(nn.Sequential(
             self.addConv2D(image_channels, 32),
@@ -144,6 +155,7 @@ class BasicModel(torch.nn.Module):
             
             self.addConv2D(self.output_channels[4], self.output_channels[5], padding=0, kernel_size = [2,3])
         ))
+        '''
     
     def forward(self, x):
         """
@@ -159,7 +171,13 @@ class BasicModel(torch.nn.Module):
             shape(-1, output_channels[0], 38, 38),
         """
 
-
+        output = self.model(x)
+        print(output)
+        print(output.shape)
+        return output
+        
+        
+        '''
         out_features = []
         last_out_feature = x
         for i in range(6):
@@ -172,10 +190,11 @@ class BasicModel(torch.nn.Module):
         #6 lag i cnn
         for idx, feature in enumerate(out_features):
             expected_shape = (self.output_channels[idx], self.output_feature_size[idx], self.output_feature_size[idx])
+        '''
 #             assert feature.shape[1:] == expected_shape, \
 #                 f"Expected shape: {expected_shape}, got: {feature.shape[1:]} at output IDX: {idx}"
 
-        return tuple(out_features)
+        # return tuple(out_features)
     
     def addConv2D(self, image_channels, num_filters, s=1, padding=1, kernel_size = 3):
         return nn.Conv2d(
