@@ -25,10 +25,13 @@ def add_vgg(cfg, batch_norm=False):
                 layers += [conv2d, nn.ReLU(inplace=True)]
             in_channels = v
     pool5 = nn.MaxPool2d(kernel_size=3, stride=1, padding=1)
-    conv6 = nn.Conv2d(512, 1024, kernel_size=3, padding=6, dilation=6)
+    conv6 = nn.Conv2d(512, 1024, kernel_size=(2,3), padding=6, dilation=6)
     conv7 = nn.Conv2d(1024, 1024, kernel_size=1)
     layers += [pool5, conv6,
                nn.ReLU(inplace=True), conv7, nn.ReLU(inplace=True)]
+    for layer in layers:
+        print(layer)
+        
     return layers
 
 
@@ -57,14 +60,6 @@ vgg_base = {
 }
 extras_base = {
     '240': [256, 'S', 512, 128, 'S', 256, 128, 256, 128, 256],
-}
-
-vgg_base = {
-    '300': [64, 64, 'M', 128, 128, 'M', 256, 256, 256, 'C', 512, 512, 512, 'M',
-            512, 512, 512],
-}
-extras_base = {
-    '300': [256, 'S', 512, 128, 'S', 256, 128, 256, 128, 256],
 }
 
 
@@ -125,5 +120,8 @@ class VGG(nn.Module):
             if k % 2 == 1:
                 features.append(x)
 
+                
+        for idx, feature in enumerate(features):
+            print(feature.shape[1:])
         return tuple(features)
 
