@@ -23,9 +23,16 @@ class ResnetModel(torch.nn.Module):
         self.output_feature_size = cfg.MODEL.PRIORS.FEATURE_MAPS
 
         
-        self.model = torchvision.models.resnet18(pretrained=cfg.MODEL.BACKBONE.PRETRAINED)
+        self.model = torchvision.models.resnet34(pretrained=cfg.MODEL.BACKBONE.PRETRAINED)
 
         print(self.model)
+        for layer in self.model:
+            if type(layer) == torch.nn.Conv2d:
+                print(layer)
+
+                layer.shape
+        self.model.conv1.shape[0] = cfg.defaults.output_channels[0]
+
 
         self.sequential_layers = [
             self.model.conv1,
@@ -61,11 +68,13 @@ class ResnetModel(torch.nn.Module):
                 f"Output shape of layer: {x.shape}"
             )
 
+        for idx, feature in enumerate(out_features):
+            print(feature.shape[1:])
+
         return tuple(out_features)
 
         # output = self.model(x)
         # print(output)
         # print(output.shape)
         # return output
-
 
