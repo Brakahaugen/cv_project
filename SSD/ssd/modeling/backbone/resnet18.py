@@ -25,7 +25,7 @@ class ResnetModel(torch.nn.Module):
         
         self.model = torchvision.models.resnet34(pretrained=cfg.MODEL.BACKBONE.PRETRAINED)
 
-        # print(self.model)
+        print(self.model)
 
 
         # self.model.conv1.shape[0] = cfg.defaults.output_channels[0]
@@ -59,18 +59,10 @@ class ResnetModel(torch.nn.Module):
         out_features = []
 
         x = self.model.conv1(x)
-        #Problemet er at denne har kernel 7x7 og ikke 3x3
-        #Fordi den her scaler ned bildet ganger to.
-
         x = self.model.bn1(x)
         x = self.model.relu(x)
         x = self.model.maxpool(x)
-#         ResNet(
-#   (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
-#   (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-#   (relu): ReLU(inplace=True)
-#   (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
-
+        
         for layer in self.sequential_layers:
             x = layer(x)
             out_features.append(x)
@@ -78,8 +70,8 @@ class ResnetModel(torch.nn.Module):
                 f"Output shape of layer: {x.shape}"
             )
 
-        # for idx, feature in enumerate(out_features):
-        #     print(feature.shape[1:])
+        for idx, feature in enumerate(out_features):
+            print(feature.shape[1:])
 
         return tuple(out_features)
 
