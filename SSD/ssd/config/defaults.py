@@ -17,15 +17,28 @@ cfg.MODEL.SIZE_VARIANCE = 0.2
 # ---------------------------------------------------------------------------- #
 cfg.MODEL.BACKBONE = CN()
 cfg.MODEL.BACKBONE.NAME = 'rest'
-cfg.MODEL.BACKBONE.OUT_CHANNELS = (512, 1024, 512, 256, 256, 256)
+cfg.MODEL.BACKBONE.OUT_CHANNELS = (64, 64, 64, 64, 128, 256, 512) #(512, 1024, 512, 256, 256, 256)
 cfg.MODEL.BACKBONE.PRETRAINED = True
 cfg.MODEL.BACKBONE.INPUT_CHANNELS = 3
+# Output shape of layer: torch.Size([32, 64, 120, 160])
+# Output shape of layer: torch.Size([32, 64, 120, 160])
+# Output shape of layer: torch.Size([32, 64, 120, 160])
+# Output shape of layer: torch.Size([32, 64, 120, 160])
+# Output shape of layer: torch.Size([32, 128, 60, 80])
+# Output shape of layer: torch.Size([32, 256, 30, 40])
+# Output shape of layer: torch.Size([32, 512, 15, 20])
 
+# nå har vi 120 160
+# vi vil ha 30  40
+# max_pooler 2 gang
 # -----------------------------------------------------------------------------
 # PRIORS
 # -----------------------------------------------------------------------------
 cfg.MODEL.PRIORS = CN()
-cfg.MODEL.PRIORS.FEATURE_MAPS = [[30,40], [21, 20], [11, 10], [6, 5], [4, 3], [2, 1]] #[38, 19, 10, 5, 3, 1]
+cfg.MODEL.PRIORS.FEATURE_MAPS = [[120,160], [120,160], [120,160], [120,160], [60,80], [30,40],[15,20]] 
+#[[30,40], [21, 20], [11, 10], [6, 5], [4, 3], [2, 1]] #[38, 19, 10, 5, 3, 1]
+
+
 
 cfg.MODEL.PRIORS.STRIDES = [[8,8], [16,16], [30, 32], [60, 64], [120, 107], [240,320]]
 cfg.MODEL.PRIORS.MIN_SIZES = [5, 15, 50, 80, 100, 120]#[30, 60, 111, 162, 213, 264]

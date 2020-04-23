@@ -75,3 +75,14 @@ class ResnetModel(torch.nn.Module):
         # print(output.shape)
         # return output
 
+# Output shape of layer: torch.Size([32, 64, 120, 160])
+# Output shape of layer: torch.Size([32, 64, 120, 160])
+# Output shape of layer: torch.Size([32, 64, 120, 160])
+# Output shape of layer: torch.Size([32, 64, 120, 160])
+# Output shape of layer: torch.Size([32, 128, 60, 80])
+# Output shape of layer: torch.Size([32, 256, 30, 40])
+# Output shape of layer: torch.Size([32, 512, 15, 20])
+
+# nå har vi 120 160
+# vi vil ha 30  40
+# max_pooler 2 ganger
