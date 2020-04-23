@@ -32,8 +32,7 @@ class ResnetModel(nn.Module):
 
         
         
-        self.model = [
-
+        self.model = nn.ModuleList([
             nn.Sequential(
                 self.resnet.conv1,
                 self.resnet.bn1,
@@ -75,8 +74,9 @@ class ResnetModel(nn.Module):
                 nn.BatchNorm2d(output_channels[5]),
                 nn.ReLU(inplace=True)
             )
-        ]
+        ])
 
+        # self.model = nn.ModuleList([self.model])
         print(self.model)
 
     def forward(self, x):
