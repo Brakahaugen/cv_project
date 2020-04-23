@@ -42,12 +42,12 @@ cfg.MODEL.PRIORS.FEATURE_MAPS = [[120,160], [120,160], [120,160], [120,160], [60
 
 cfg.MODEL.PRIORS.STRIDES = [[2,2], [1,1], [1,1], [1,1], [2,2], [2,2], [2,2]]
 #[[8,8], [16,16], [30, 32], [60, 64], [120, 107], [240,320]]
-cfg.MODEL.PRIORS.MIN_SIZES = [5, 15, 50, 80, 100, 120]#[30, 60, 111, 162, 213, 264]
-cfg.MODEL.PRIORS.MAX_SIZES = [60, 111, 162, 213, 264, 315]
-cfg.MODEL.PRIORS.ASPECT_RATIOS = [[2], [2, 3], [2, 3], [2, 3], [2], [2]]
+cfg.MODEL.PRIORS.MIN_SIZES = [5, 15, 50, 80, 100, 120, 150]#[30, 60, 111, 162, 213, 264]
+cfg.MODEL.PRIORS.MAX_SIZES = [60, 111, 162, 213, 264, 315, 340]
+cfg.MODEL.PRIORS.ASPECT_RATIOS = [[2], [2, 3], [2, 3], [2, 3], [2], [2], [2]]
 # When has 1 aspect ratio, every location has 4 boxes, 2 ratio 6 boxes.
 # #boxes = 2 + #ratio * 2
-cfg.MODEL.PRIORS.BOXES_PER_LOCATION = [4, 6, 6, 6, 4, 4]  # number of boxes per feature map location
+cfg.MODEL.PRIORS.BOXES_PER_LOCATION = [4, 6, 6, 6, 4, 4, 4]  # number of boxes per feature map location
 cfg.MODEL.PRIORS.CLIP = True
 
 # -----------------------------------------------------------------------------
