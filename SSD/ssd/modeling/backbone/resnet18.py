@@ -58,9 +58,9 @@ class ResnetModel(torch.nn.Module):
         """
         out_features = []
 
-        x = self.model.conv1(x)
-        x = self.model.bn1(x)
-        x = self.model.relu(x)
+        # x = self.model.conv1(x)
+        # x = self.model.bn1(x)
+        # x = self.model.relu(x)
 
         for layer in self.sequential_layers:
             x = layer(x)
