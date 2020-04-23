@@ -77,6 +77,8 @@ class ResnetModel(nn.Module):
             )
         ]
 
+        print(self.model)
+
     def forward(self, x):
         """
             shape(-1, output_channels[3], 3, 3),
@@ -87,6 +89,7 @@ class ResnetModel(nn.Module):
         """
         out_features = []
         for layer in self.model:
+            x = layer(x)
             out_features.append(x)
             print(
                 f"Output shape of layer: {x.shape}"
