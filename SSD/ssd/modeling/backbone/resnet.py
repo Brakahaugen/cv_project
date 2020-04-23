@@ -48,33 +48,48 @@ class ResnetModel(nn.Module):
             ),
 
             nn.Sequential(
-                torchvision.models.resnet.BasicBlock(output_channels[0], output_channels[1], downsample=basic_downsample(output_channels[0], output_channels[1])),
+                torchvision.models.resnet.BasicBlock(output_channels[0], output_channels[1], stride = (2, 2), downsample=basic_downsample(output_channels[0], output_channels[1])),
                 torchvision.models.resnet.BasicBlock(output_channels[1], output_channels[1])
             ),
+            # input blir kjørt gjennom blocken, og den variablen kalles out
+            # x også kjørt gjennom downsample, den variablen kalt identity
+            # output += identity
+            # men da har x blitt downsampla
+            # og identity har ikke blitt downsampla
+            #identity = downsample.forward(x)
 
             nn.Sequential(
-                torchvision.models.resnet.BasicBlock(output_channels[1], output_channels[2], downsample=basic_downsample(output_channels[1], output_channels[2])),
+                torchvision.models.resnet.BasicBlock(output_channels[1], output_channels[2], stride = (2, 2), downsample=basic_downsample(output_channels[1], output_channels[2])),
                 torchvision.models.resnet.BasicBlock(output_channels[2], output_channels[2])
             ),
 
             nn.Sequential(
-                torchvision.models.resnet.BasicBlock(output_channels[2], output_channels[3], downsample=basic_downsample(output_channels[2], output_channels[3])),
+                torchvision.models.resnet.BasicBlock(output_channels[2], output_channels[3], stride = (2, 2), downsample=basic_downsample(output_channels[2], output_channels[3])),
                 torchvision.models.resnet.BasicBlock(output_channels[3], output_channels[3])
             ),
 
             nn.Sequential(
-                torchvision.models.resnet.BasicBlock(output_channels[3], output_channels[4], downsample=basic_downsample(output_channels[3], output_channels[4])),
+                torchvision.models.resnet.BasicBlock(output_channels[3], output_channels[4], stride = (2, 2), downsample=basic_downsample(output_channels[3], output_channels[4])),
                 torchvision.models.resnet.BasicBlock(output_channels[4], output_channels[4])
             ),
 
             nn.Sequential(
-                torchvision.models.resnet.BasicBlock(output_channels[4], output_channels[5], downsample=basic_downsample(output_channels[4], output_channels[5])),
+                # 2x3
+                torchvision.models.resnet.BasicBlock(output_channels[4], output_channels[5], stride = (2, 2), downsample=basic_downsample(output_channels[4], output_channels[5])),
                 torchvision.models.resnet.BasicBlock(output_channels[5], output_channels[5]),
-                nn.Conv2d(output_channels[5], output_channels[5], kernel_size=(1, 1), stride=(1, 1), padding=(1, 1), bias=False),
+
+                # 1x2
+                nn.Conv2d(output_channels[5], output_channels[5], kernel_size=(3, 4), padding=(1, 1), stride=(1, 1), bias=False),
                 nn.BatchNorm2d(output_channels[5]),
                 nn.ReLU(inplace=True)
             )
         ])
+#         torch.Size([256, 30, 40])
+# torch.Size([512, 15, 20])
+# torch.Size([256, 8, 10])
+# torch.Size([256, 4, 5])
+# torch.Size([128, 2, 3])
+# torch.Size([64, 2, 2])
 
         # self.model = nn.ModuleList([self.model])
         print(self.model)
