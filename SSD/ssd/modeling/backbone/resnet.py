@@ -70,10 +70,9 @@ class ResnetModel(nn.Module):
 
             nn.Sequential(
                 torchvision.models.BasicBlock(output_channels[4], output_channels[5], downsample=basic_downsample(output_channels[4], output_channels[5])),
-                torchvision.models.BasicBlock(output_channels[5], output_channels[5])
-            
-                nn.Conv2d(output_channels[5], output_channels[6], kernel_size=(1, 1), stride=(1, 1), padding=(1, 1), bias=False)),
-                nn.BatchNorm2d(),
+                torchvision.models.BasicBlock(output_channels[5], output_channels[5]),
+                nn.Conv2d(output_channels[5], output_channels[5], kernel_size=(1, 1), stride=(1, 1), padding=(1, 1), bias=False),
+                nn.BatchNorm2d(output_channels[5]),
                 nn.ReLU()
             )
         ]
