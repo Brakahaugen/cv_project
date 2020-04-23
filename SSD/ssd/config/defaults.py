@@ -16,7 +16,7 @@ cfg.MODEL.SIZE_VARIANCE = 0.2
 # Backbone
 # ---------------------------------------------------------------------------- #
 cfg.MODEL.BACKBONE = CN()
-cfg.MODEL.BACKBONE.NAME = 'vgg'
+cfg.MODEL.BACKBONE.NAME = 'rest'
 cfg.MODEL.BACKBONE.OUT_CHANNELS = (512, 1024, 512, 256, 256, 256)
 cfg.MODEL.BACKBONE.PRETRAINED = True
 cfg.MODEL.BACKBONE.INPUT_CHANNELS = 3

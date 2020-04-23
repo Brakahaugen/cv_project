@@ -23,7 +23,7 @@ class ResnetModel(torch.nn.Module):
         self.output_feature_size = cfg.MODEL.PRIORS.FEATURE_MAPS
 
         
-        self.model = torchvision.models.resnet18()
+        self.model = torchvision.models.resnet18(pretrained=cfg.MODEL.BACKBONE.PRETRAINED)
 
         print(self.model)
 

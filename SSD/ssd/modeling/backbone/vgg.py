@@ -121,7 +121,7 @@ class VGG(nn.Module):
                 features.append(x)
 
                 
-        for idx, feature in enumerate(features):
-            print(feature.shape[1:])
+        # for idx, feature in enumerate(features):
+        #     print(feature.shape[1:])
         return tuple(features)
 
