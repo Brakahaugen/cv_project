@@ -25,20 +25,21 @@ class ResnetModel(torch.nn.Module):
         
         self.model = torchvision.models.resnet34(pretrained=cfg.MODEL.BACKBONE.PRETRAINED)
 
-        print(self.model)
+        # print(self.model)
 
 
         # self.model.conv1.shape[0] = cfg.defaults.output_channels[0]
 
 
         self.sequential_layers = [
-            self.model.conv1,
-            self.model.bn1,
-            self.model.relu,
+            # self.model.conv1,
+            # self.model.bn1,
+            # self.model.relu,
             self.model.layer1,
             self.model.layer2,
             self.model.layer3,  # Ouput 256 x 40 x 30
             self.model.layer4,
+
         ]
 
 
@@ -57,6 +58,9 @@ class ResnetModel(torch.nn.Module):
         """
         out_features = []
 
+        x = self.model.conv1(x)
+        x = self.model.bn1(x)
+        x = self.model.relu(x)
 
         for layer in self.sequential_layers:
             x = layer(x)
@@ -65,8 +69,8 @@ class ResnetModel(torch.nn.Module):
                 f"Output shape of layer: {x.shape}"
             )
 
-        for idx, feature in enumerate(out_features):
-            print(feature.shape[1:])
+        # for idx, feature in enumerate(out_features):
+        #     print(feature.shape[1:])
 
         return tuple(out_features)
 

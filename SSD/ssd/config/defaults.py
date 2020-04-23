@@ -17,7 +17,7 @@ cfg.MODEL.SIZE_VARIANCE = 0.2
 # ---------------------------------------------------------------------------- #
 cfg.MODEL.BACKBONE = CN()
 cfg.MODEL.BACKBONE.NAME = 'rest'
-cfg.MODEL.BACKBONE.OUT_CHANNELS = (64, 64, 64, 64, 128, 256, 512) #(512, 1024, 512, 256, 256, 256)
+cfg.MODEL.BACKBONE.OUT_CHANNELS = (64, 128, 256, 512) #(512, 1024, 512, 256, 256, 256)
 cfg.MODEL.BACKBONE.PRETRAINED = True
 cfg.MODEL.BACKBONE.INPUT_CHANNELS = 3
 # Output shape of layer: torch.Size([32, 64, 120, 160])
@@ -35,19 +35,19 @@ cfg.MODEL.BACKBONE.INPUT_CHANNELS = 3
 # PRIORS
 # -----------------------------------------------------------------------------
 cfg.MODEL.PRIORS = CN()
-cfg.MODEL.PRIORS.FEATURE_MAPS = [[120,160], [120,160], [120,160], [120,160], [60,80], [30,40],[15,20]] 
+cfg.MODEL.PRIORS.FEATURE_MAPS = [[120,160], [60,80], [30,40],[15,20]] 
 #[[30,40], [21, 20], [11, 10], [6, 5], [4, 3], [2, 1]] #[38, 19, 10, 5, 3, 1]
 
 
 
-cfg.MODEL.PRIORS.STRIDES = [[2,2], [1,1], [1,1], [1,1], [2,2], [2,2], [2,2]]
+cfg.MODEL.PRIORS.STRIDES = [[1,1], [2,2], [2,2], [2,2]] # [2,2], [1,1], [1,1], 
 #[[8,8], [16,16], [30, 32], [60, 64], [120, 107], [240,320]]
-cfg.MODEL.PRIORS.MIN_SIZES = [5, 15, 50, 80, 100, 120, 150]#[30, 60, 111, 162, 213, 264]
-cfg.MODEL.PRIORS.MAX_SIZES = [60, 111, 162, 213, 264, 315, 340]
-cfg.MODEL.PRIORS.ASPECT_RATIOS = [[2], [2, 3], [2, 3], [2, 3], [2], [2], [2]]
+cfg.MODEL.PRIORS.MIN_SIZES = [5, 15, 50, 80]#[30, 60, 111, 162, 213, 264]
+cfg.MODEL.PRIORS.MAX_SIZES = [60, 111, 162, 213] # , 264, 315, 340
+cfg.MODEL.PRIORS.ASPECT_RATIOS = [[2], [2, 3], [2, 3], [2, 3]]
 # When has 1 aspect ratio, every location has 4 boxes, 2 ratio 6 boxes.
 # #boxes = 2 + #ratio * 2
-cfg.MODEL.PRIORS.BOXES_PER_LOCATION = [4, 6, 6, 6, 4, 4, 4]  # number of boxes per feature map location
+cfg.MODEL.PRIORS.BOXES_PER_LOCATION = [4, 6, 6, 4]  # number of boxes per feature map location
 cfg.MODEL.PRIORS.CLIP = True
 
 # -----------------------------------------------------------------------------
