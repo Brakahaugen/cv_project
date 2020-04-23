@@ -26,12 +26,9 @@ class ResnetModel(torch.nn.Module):
         self.model = torchvision.models.resnet34(pretrained=cfg.MODEL.BACKBONE.PRETRAINED)
 
         print(self.model)
-        for layer in self.model:
-            if type(layer) == torch.nn.Conv2d:
-                print(layer)
 
-                layer.shape
-        self.model.conv1.shape[0] = cfg.defaults.output_channels[0]
+
+        # self.model.conv1.shape[0] = cfg.defaults.output_channels[0]
 
 
         self.sequential_layers = [
