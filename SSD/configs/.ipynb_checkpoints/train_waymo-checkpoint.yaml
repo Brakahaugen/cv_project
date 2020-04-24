@@ -1,9 +1,9 @@
 MODEL:
     NUM_CLASSES: 5
     BACKBONE:
-        NAME: 'basic'
+        NAME: 'rest'
         PRETRAINED: False
-        OUT_CHANNELS: [128, 256, 512, 256, 128, 64] #[128, 256, 128, 128, 64, 64] 
+        OUT_CHANNELS: (128, 256, 512, 256, 128, 128) # (64, 128, 256, 512) # (512, 1024, 512, 256, 256, 256) # [128, 256, 512, 256, 128, 64] #[128, 256, 128, 128, 64, 64] 
         INPUT_CHANNELS: 3
 INPUT:
     IMAGE_SIZE: [320, 240] # 300
@@ -16,5 +16,5 @@ SOLVER:
     GAMMA: 0.1
     BATCH_SIZE: 32
     LR: 5e-3
-OUTPUT_DIR: 'outputs/basic'
+OUTPUT_DIR: 'outputs/rest'
 DATASET_DIR: "datasets"
