@@ -37,22 +37,22 @@ class ResnetModel(nn.Module):
                 self.resnet.conv1,
                 self.resnet.bn1,
                 self.resnet.relu,
-                self.resnet.maxpool,
                 self.resnet.layer1,
                 self.resnet.layer2,
             ),
             
             self.resnet.layer3,
+
+            self.resnet.layer4,
             # nn.Sequential(
             #     torchvision.models.resnet.BasicBlock(output_channels[0], output_channels[1], stride = (2, 2), downsample=basic_downsample(output_channels[0], output_channels[1])),
             #     torchvision.models.resnet.BasicBlock(output_channels[1], output_channels[1])
             # ),
 
-            self.resnet.layer4,
-#             nn.Sequential(
-#                 torchvision.models.resnet.BasicBlock(output_channels[1], output_channels[2], stride = (2, 2), downsample=basic_downsample(output_channels[1], output_channels[2])),
-#                 torchvision.models.resnet.BasicBlock(output_channels[2], output_channels[2])
-#             ),
+            nn.Sequential(
+                torchvision.models.resnet.BasicBlock(output_channels[1], output_channels[2], stride = (2, 2), downsample=basic_downsample(output_channels[1], output_channels[2])),
+                torchvision.models.resnet.BasicBlock(output_channels[2], output_channels[2])
+            ),
 
             nn.Sequential(
                 torchvision.models.resnet.BasicBlock(output_channels[2], output_channels[3], stride = (2, 2), downsample=basic_downsample(output_channels[2], output_channels[3])),
@@ -97,11 +97,11 @@ class ResnetModel(nn.Module):
         for layer in self.model:
             x = layer(x)
             out_features.append(x)
-#             print(
-#                 f"Output shape of layer: {x.shape}"
-#             )
+            print(
+                f"Output shape of layer: {x.shape}"
+            )
 
-#         for idx, feature in enumerate(out_features):
-#             print(feature.shape[1:])
+        for idx, feature in enumerate(out_features):
+            print(feature.shape[1:])
 
         return tuple(out_features)
