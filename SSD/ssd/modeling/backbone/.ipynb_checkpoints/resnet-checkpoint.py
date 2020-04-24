@@ -105,11 +105,11 @@ class ResnetModel(nn.Module):
         for layer in self.model:
             x = layer(x)
             out_features.append(x)
-            print(
-                f"Output shape of layer: {x.shape}"
-            )
+#             print(
+#                 f"Output shape of layer: {x.shape}"
+#             )
 
-        for idx, feature in enumerate(out_features):
-            print(feature.shape[1:])
+#         for idx, feature in enumerate(out_features):
+#             print(feature.shape[1:])
 
         return tuple(out_features)
